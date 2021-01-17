@@ -1,4 +1,7 @@
 #!/bin/bash
+# sometimes i use tabs and sometimes i use spaces but theres one thing that
+# i do 100% of the time and thats not give a fuck
+
 list_players() { # this just gets rid of the extra garbage on the end of kdeconnect
 	playerctl -l |  sed 's/\.[^[[:blank:]]*//'
 }
