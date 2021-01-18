@@ -9,9 +9,9 @@ list_players() { # this just gets rid of the extra garbage on the end of kdeconn
 # run through every player, and once we find the one that's playing, echo its details
 one_player_active() {
 	for i in $(list_players); do
-		if [ $(playerctl status -p $i | grep Playing) ]; then
-			echo $(playerctl metadata artist -p $i) - $(playerctl metadata title -p $i)
-			echo $(playerctl metadata title -p $i)
+		if playerctl status -p "$i" | grep -q 'Playing' ; then
+			echo "$(playerctl metadata artist -p "$i") - $(playerctl metadata title -p "$i")"
+			echo "$(playerctl metadata title -p "$i")"
 		fi
 	done
 }
@@ -22,8 +22,8 @@ case $(playerctl status -a | grep -c Playing) in
 	# right now this script will just ignore my phone if theres more than one active player
         # if theres multiple players that arent kdeconnect, fuck knows whatll happen lol	
 	*)
-	  echo $(playerctl metadata artist -i kdeconnect) - $(playerctl metadata title -i kdeconnect) 
-	  echo $(playerctl metadata title -i kdeconnect)
+	  echo "$(playerctl metadata artist -i kdeconnect) - $(playerctl metadata title -i kdeconnect)"
+	  echo "$(playerctl metadata title -i kdeconnect)"
 	;;
 esac
 
