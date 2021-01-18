@@ -1,5 +1,6 @@
 # Basic configuration stuff
 workspace_layout default
+focus_on_window_activation urgent
 set $mod Mod4
 default_border pixel 1
 hide_edge_borders none
@@ -36,6 +37,8 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 
 # Keybinds
+bindsym $mod+s exec i3-input -F 'mark --toggle %s' -l 1 -P 'Mark: '
+bindsym $mod+x exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q exec "~/.config/i3/scripts/shutdown_menu -p rofi -c;"
@@ -96,6 +99,7 @@ bindsym $mod+Shift+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+mod1+space sticky toggle
 # focus the parent container
 bindsym $mod+a focus parent
 # focus the child container
@@ -180,6 +184,7 @@ bar {
     font pango:Font Awesome 10
     status_command i3blocks -c ~/.config/i3/i3blocks.conf 
     position bottom
+    strip_workspace_numbers yes
     colors {
       separator #65737E
         background #121314
